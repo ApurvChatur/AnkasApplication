@@ -12,8 +12,8 @@ export default defineConfig({
         "name":"Ankas",
         "short_name":"Ankas",
         "display": "standalone",
-        "background_color": "#071952",
-        "theme_color": "#071952",
+        "background_color": "#755139",
+        "theme_color": "#755139",
         "icons":[
           {
             src: "Business/Ankas/favicon_io/android-chrome-512x512.png",

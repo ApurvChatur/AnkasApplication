@@ -16,7 +16,7 @@ function CounterSectionComponent({ Redux }) {
               return (
                 <React.Fragment key={index}>
                   <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
-                    <div className="bg-[#00203F] dark:bg-[#ADEFD1] text-[#ADEFD1] dark:text-[#00203F] bg-opacity-60 px-4 py-6 rounded-lg">
+                    <div className="bg-[#755139] dark:bg-[#F2EDD7] text-[#F2EDD7] dark:text-[#755139] bg-opacity-60 px-4 py-6 rounded-lg">
                       <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
                         <path d="M8 17l4 4 4-4m-4-5v9"></path>
                         <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>

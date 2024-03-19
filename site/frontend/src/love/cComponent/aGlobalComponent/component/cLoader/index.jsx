@@ -4,7 +4,8 @@ import brand from '@/love/dFunction/gBrand';
 
 const Loader = ({ text }) => {
   return (
-    <div className="flex justify-center items-center h-96 text-gray-400 bg-gray-900 body-font">          
+    <div className="flex flex-col justify-center items-center h-screen body-font bg-[#F2EDD7] dark:bg-[#755139] text-[#755139] dark:text-[#F2EDD7]">          
+      <img src={brand().logo} alt={brand().name} className='w-1/12' />
       {text || "Loading..."}
     </div>
   )

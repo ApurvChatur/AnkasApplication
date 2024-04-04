@@ -197,13 +197,13 @@ const sendEmail = async (option) => {
     };
   
     transporter.sendMail(mailOptions, 
-      // (error, info) => {
-      //   if (error) {
-      //     console.log("Some Error")
-      //   } else {
-      //     console.log("Success")
-      //   }
-      // }
+      (error, info) => {
+        if (error) {
+          console.log("Some Error")
+        } else {
+          console.log("Success")
+        }
+      }
     );
   } catch (error) {
     console.log("Some Error")

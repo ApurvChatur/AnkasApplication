@@ -72,7 +72,7 @@ function ProgramSectionComponent({ Redux }) {
         </div>
       </section>
 
-      <Separator/>
+      {/* <Separator/> */}
     </React.Fragment>
   );
 }

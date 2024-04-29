@@ -13,6 +13,16 @@ const API = {
 					)
 				}, 
 			},
+			ProgramPageAPI: {
+				RetrieveAPI: (props) => {
+					return (
+						APIBase({
+							method: "GET",
+							url: `/api/v1/program-page/retrieve/${props.id}`,
+						})
+					)
+				}, 
+			},
 			AboutAPI: {
 				ListAPI: (props) => {
 					return (
@@ -127,6 +137,14 @@ const API = {
 							)
 						}, 
 					},
+					NotificationListAPI: (props) => {
+						return (
+							APIBase({
+								method: "GET",
+								url: `/api/v1/notification/list`,
+							})
+						)
+					}, 
 					Logout: {
 						LogoutAPI: (props) => {
 							return (

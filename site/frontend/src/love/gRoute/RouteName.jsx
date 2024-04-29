@@ -1,6 +1,7 @@
 const RouteName = {
 	GlobalRoute: {
 		HomeRoute: "",
+		ProgramRoute: "program",
 		AboutRoute: "about",
 		ContactRoute: "contact",
 	},

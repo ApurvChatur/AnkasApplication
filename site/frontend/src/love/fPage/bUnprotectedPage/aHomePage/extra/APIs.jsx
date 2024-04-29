@@ -106,6 +106,7 @@ const APIs = {
               description: serverResponse.retrieve?.program_section_retrieve?.aDescription,
               programs: serverResponse.retrieve?.program_section_retrieve?.cPrograms?.map(each => {
                 return {
+                  id: each?._id,
                   image: each?.aImage,
                   title: each?.aTitle,
                   subtitle: each?.aSubtitle,

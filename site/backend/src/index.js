@@ -18,6 +18,7 @@ dotenv.config({path: ".env"})
 const corporation = process.env.CORPORATION;
 const organisation = process.env.ORGANISATION;
 const enterprise = process.env.ENTERPRISE;
+const firm = process.env.FIRM;
 const application = process.env.APPLICATION;
 
 // Connect App
@@ -67,20 +68,27 @@ const appConfig = {
 
 if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise]) {
   if (application && appConfig[corporation][organisation][enterprise][application]) {
-    // console.log("Succeed to connect to app.js")
+    console.log("Succeed to connect to app.js")
     app = require(appConfig[corporation][organisation][enterprise][application]);
   } else {
-    // console.log("Failed to connect to app.js")
+    console.log("Failed to connect to app.js")
   }
+} else if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise] && appConfig[corporation][organisation][enterprise][firm]) {
+  if (application && appConfig[corporation][organisation][enterprise][firm][application]) {
+    console.log("Succeed to connect to app.js")
+    app = require(appConfig[corporation][organisation][enterprise][firm][application]);
+  } else {
+    console.log("Failed to connect to app.js")
+  }  
 } else if (appConfig[corporation] && appConfig[corporation][organisation]) {
   if (application && appConfig[corporation][organisation][application]) {
-    // console.log("Succeed to connect to app.js")
+    console.log("Succeed to connect to app.js")
     app = require(appConfig[corporation][organisation][application]);
   } else {
-    // console.log("Failed to connect to app.js")
+    console.log("Failed to connect to app.js")
   }  
 } else {
-  // console.log("Failed to connect to app.js")
+  console.log("Failed to connect to app.js")
 }
 
 // Connect Database
@@ -137,22 +145,30 @@ const socketConfig = {
 
 if (socketConfig[corporation] && socketConfig[corporation][organisation] && socketConfig[corporation][organisation][enterprise]) {
   if (application && socketConfig[corporation][organisation][enterprise][application]) {
-    // console.log("Succeed to connect to socket")
+    console.log("Succeed to connect to socket")
     socketServer = require(socketConfig[corporation][organisation][enterprise][application]);
     socketServer(server)
   } else {
-    // console.log("Failed to connect to socket")
+    console.log("Failed to connect to socket")
   }
+} else if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise] && appConfig[corporation][organisation][enterprise][firm]) {
+  if (application && appConfig[corporation][organisation][enterprise][firm][application]) {
+    console.log("Succeed to connect to socket")
+    socketServer = require(socketConfig[corporation][organisation][enterprise][firm][application]);
+    socketServer(server)
+  } else {
+    console.log("Failed to connect to socket")
+  }  
 } else if (socketConfig[corporation] && socketConfig[corporation][organisation]) {
   if (application && socketConfig[corporation][organisation][application]) {
-    // console.log("Succeed to connect to socket")
+    console.log("Succeed to connect to socket")
     socketServer = require(socketConfig[corporation][organisation][application]);
     socketServer(server);
   } else {
-    // console.log("Failed to connect to socket")
+    console.log("Failed to connect to socket")
   }  
 } else {
-  // console.log("Failed to connect to socket")
+  console.log("Failed to connect to socket")
 }
 
 // Cluster

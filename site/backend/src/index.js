@@ -66,17 +66,17 @@ const appConfig = {
   }
 };
 
-if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise]) {
-  if (application && appConfig[corporation][organisation][enterprise][application]) {
-    console.log("Succeed to connect to app.js")
-    app = require(appConfig[corporation][organisation][enterprise][application]);
-  } else {
-    console.log("Failed to connect to app.js")
-  }
-} else if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise] && appConfig[corporation][organisation][enterprise][firm]) {
+if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise] && appConfig[corporation][organisation][enterprise][firm]) {
   if (application && appConfig[corporation][organisation][enterprise][firm][application]) {
     console.log("Succeed to connect to app.js")
     app = require(appConfig[corporation][organisation][enterprise][firm][application]);
+  } else {
+    console.log("Failed to connect to app.js")
+  }
+} else if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise]) {
+  if (application && appConfig[corporation][organisation][enterprise][application]) {
+    console.log("Succeed to connect to app.js")
+    app = require(appConfig[corporation][organisation][enterprise][application]);
   } else {
     console.log("Failed to connect to app.js")
   }  
@@ -143,18 +143,18 @@ const socketConfig = {
   }
 };
 
-if (socketConfig[corporation] && socketConfig[corporation][organisation] && socketConfig[corporation][organisation][enterprise]) {
-  if (application && socketConfig[corporation][organisation][enterprise][application]) {
+if (socketConfig[corporation] && socketConfig[corporation][organisation] && socketConfig[corporation][organisation][enterprise] && appConfig[corporation][organisation][enterprise][firm]) {
+  if (application && socketConfig[corporation][organisation][enterprise][firm][application]) {
     console.log("Succeed to connect to socket")
-    socketServer = require(socketConfig[corporation][organisation][enterprise][application]);
+    socketServer = require(socketConfig[corporation][organisation][enterprise][firm][application]);
     socketServer(server)
   } else {
     console.log("Failed to connect to socket")
   }
-} else if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise] && appConfig[corporation][organisation][enterprise][firm]) {
-  if (application && appConfig[corporation][organisation][enterprise][firm][application]) {
+} else if (appConfig[corporation] && appConfig[corporation][organisation] && appConfig[corporation][organisation][enterprise]) {
+  if (application && appConfig[corporation][organisation][enterprise][application]) {
     console.log("Succeed to connect to socket")
-    socketServer = require(socketConfig[corporation][organisation][enterprise][firm][application]);
+    socketServer = require(socketConfig[corporation][organisation][enterprise][application]);
     socketServer(server)
   } else {
     console.log("Failed to connect to socket")

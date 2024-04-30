@@ -8,6 +8,7 @@ const errorHandler = require('../../../../dLove/cMiddleware/aError');
 
 const baseRoute = require('../../../../dLove/aMCR/bCommon/cRoute/aSetting/aBaseRoute');
 const adminHeroRoute = require('../../../../dLove/aMCR/bCommon/cRoute/aSetting/bAdminHeroRoute');
+const notificationRoute = require('../../../../dLove/aMCR/bCommon/cRoute/aSetting/cNotificationRoute');
 const menuRoute = require('../../../../dLove/aMCR/bCommon/cRoute/bAdministration/cMenuRoute');
 const roleRoute = require('../../../../dLove/aMCR/bCommon/cRoute/bAdministration/bRoleRoute');
 const userRoute = require('../../../../dLove/aMCR/bCommon/cRoute/bAdministration/aUserRoute');

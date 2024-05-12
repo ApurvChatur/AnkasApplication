@@ -172,25 +172,25 @@ if (socketConfig[corporation] && socketConfig[corporation][organisation] && sock
 }
 
 // Cluster
-const numCPUs = os.cpus().length;
+// const numCPUs = os.cpus().length;
 
-if (cluster.isMaster) {
-  // console.log(`Master process ${process.pid} is running`);
+// if (cluster.isMaster) {
+//   // console.log(`Master process ${process.pid} is running`);
 
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
+//   for (let i = 0; i < numCPUs; i++) {
+//     cluster.fork();
+//   }
 
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(`Worker process ${worker.process.pid} died. Restarting...`);
-    cluster.fork();
-  });
-} else {
+//   cluster.on('exit', (worker, code, signal) => {
+//     console.log(`Worker process ${worker.process.pid} died. Restarting...`);
+//     cluster.fork();
+//   });
+// } else {
   // Server Listen
   server.listen(process.env.PORT, () => {
     console.log(`Server is running on http://localhost:${process.env.PORT} at worker process ${process.pid}`)
   })
-}
+// }
 
 // Unhandled Promise Rejection
 process.on("unhandledRejection", error => {

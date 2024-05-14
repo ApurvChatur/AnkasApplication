@@ -11,9 +11,9 @@ const sendEmail = require("../../../../bFunction/iSendEmail");
 const sendMessage = require("../../../../bFunction/kSendMessage");
 const companyToCompany = require("../../../../dStaticData/aEmailData/aCompanyToCompany");
 const invalidateCache = require("../../../../bFunction/pInvalidateCache")
+const nodeCache = require("../../../../bFunction/qNodeCache")
+const destroyImage = require("../../../../bFunction/rDestroyImage")
 
-
-const nodeCache = new NodeCache();
 
 exports.userController = (Model= UserModel, Label= 'User', Cache= 'userController') => {
 	return {

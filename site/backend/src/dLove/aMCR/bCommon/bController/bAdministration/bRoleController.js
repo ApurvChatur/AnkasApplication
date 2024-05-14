@@ -8,9 +8,9 @@ const invalidateCache = require("../../../../bFunction/pInvalidateCache")
 const companyToCompany = require("../../../../dStaticData/aEmailData/aCompanyToCompany")
 const UserModel = require("../../../bCommon/aModel/bAdministration/aUserModel")
 const sendEmail = require("../../../../bFunction/iSendEmail")
+const nodeCache = require("../../../../bFunction/qNodeCache")
+const destroyImage = require("../../../../bFunction/rDestroyImage")
 
-
-const nodeCache = new NodeCache();
 
 exports.roleController = (Model= RoleModel, Label= 'Role', Cache= 'roleController') => {
 	return {

@@ -116,6 +116,9 @@ exports.notificationController = (Model= NotificationModel, Label= 'Notification
 			// Not Found
 			if (!object_retrieve) next(new ErrorHandler(`${Label} Not Found`, 404))
 
+			// Destroy Image
+			object_retrieve?.aImage?.public_id && await destroyImage(object_retrieve?.aImage?.public_id)
+
 			// Delete
 			await object_retrieve.deleteOne({"_id": "_id"})
 

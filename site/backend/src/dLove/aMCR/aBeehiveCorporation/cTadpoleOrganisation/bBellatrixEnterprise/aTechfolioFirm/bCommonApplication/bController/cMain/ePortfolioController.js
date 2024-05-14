@@ -1,5 +1,4 @@
 const cloudinary = require("cloudinary")
-const NodeCache = require('node-cache');
 const catchAsyncError = require("../../../../../../../../bFunction/aCatchAsyncError")
 const ErrorHandler = require("../../../../../../../../bFunction/bErrorHandler")
 const handleImage = require("../../../../../../../../bFunction/hHandleImage")
@@ -9,9 +8,9 @@ const invalidateCache = require("../../../../../../../../bFunction/pInvalidateCa
 const companyToCompany = require("../../../../../../../../dStaticData/aEmailData/aCompanyToCompany")
 const UserModel = require("../../../../../../../bCommon/aModel/bAdministration/aUserModel")
 const sendEmail = require("../../../../../../../../bFunction/iSendEmail")
+const nodeCache = require("../../../../../../../../bFunction/qNodeCache")
+const destroyImage = require("../../../../../../../../bFunction/rDestroyImage")
 
-
-const nodeCache = new NodeCache();
 
 exports.portfolioController = (Model= PortfolioModel, Label= 'Portfolio', Cache= 'portfolioController') => {
 	return {
@@ -192,6 +191,9 @@ exports.portfolioController = (Model= PortfolioModel, Label= 'Portfolio', Cache=
 
 			// Not Found
 			if (!object_retrieve) next(new ErrorHandler(`${Label} Not Found`, 404))
+
+			// Destroy Image
+			object_retrieve?.aImage?.public_id && await destroyImage(object_retrieve?.aImage?.public_id)
 
 			// Delete
 			await object_retrieve.deleteOne({"_id": "_id"})

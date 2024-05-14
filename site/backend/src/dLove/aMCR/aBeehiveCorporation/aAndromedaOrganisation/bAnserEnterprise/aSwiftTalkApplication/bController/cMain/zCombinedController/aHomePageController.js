@@ -8,7 +8,7 @@ const CounterModel = require("../../../aModel/cMain/bCounterModel")
 const AdminHeroModel = require("../../../../../../../bCommon/aModel/aSetting/bAdminHeroModel")
 
 
-exports.homePageController = (Label= 'Home Page') => {
+exports.homePageController = (Label= 'Home Page', Cache= 'homePageController') => {
 	return {
 		// Retrieve Controller
 		retrieve: catchAsyncError(async (request, response, next) => {

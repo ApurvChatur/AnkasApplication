@@ -1,5 +1,4 @@
 const cloudinary = require("cloudinary")
-const NodeCache = require('node-cache');
 const catchAsyncError = require("../../../../bFunction/aCatchAsyncError")
 const ErrorHandler = require("../../../../bFunction/bErrorHandler")
 const handleImage = require("../../../../bFunction/hHandleImage")
@@ -192,6 +191,9 @@ exports.roleController = (Model= RoleModel, Label= 'Role', Cache= 'roleControlle
 
 			// Not Found
 			if (!object_retrieve) next(new ErrorHandler(`${Label} Not Found`, 404))
+
+			// Destroy Image
+			object_retrieve?.aImage?.public_id && await destroyImage(object_retrieve?.aImage?.public_id)
 
 			// Delete
 			await object_retrieve.deleteOne({"_id": "_id"})

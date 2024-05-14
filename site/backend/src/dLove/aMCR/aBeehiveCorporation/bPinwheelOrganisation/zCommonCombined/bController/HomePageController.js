@@ -1,5 +1,4 @@
 const cloudinary = require("cloudinary")
-const NodeCache = require('node-cache');
 const catchAsyncError = require("../../../../../bFunction/aCatchAsyncError")
 const ErrorHandler = require("../../../../../bFunction/bErrorHandler")
 const handleImage = require("../../../../../bFunction/hHandleImage")
@@ -15,16 +14,15 @@ const ProjectSectionModel = require("../../zCommon/aModel/cMain/hProjectSectionM
 const ProjectGroupModel = require("../../zCommon/aModel/cMain/iProjectGroupModel")
 const ProjectModel = require("../../zCommon/aModel/cMain/jProjectModel")
 const AdminHeroModel = require("../../../../bCommon/aModel/aSetting/bAdminHeroModel")
+const nodeCache = require("../../../../../bFunction/qNodeCache")
 
-
-const nodeCache = new NodeCache();
 
 exports.homePageController = (Label= 'Home Page', Cache= 'homePageController') => {
 	return {
 		// Retrieve Controller
 		retrieve: catchAsyncError(async (request, response, next) => {
 
-      // List
+      // Object
 			let object = {};
 
 			// Cache
@@ -114,7 +112,26 @@ exports.homePageController = (Label= 'Home Page', Cache= 'homePageController') =
 
     // Admin Retrieve Controller
 		admin_retrieve: catchAsyncError(async (request, response, next) => {
-      let hero_retrieve = await AdminHeroModel.findOne().sort({ _id: -1 });
+
+      // Object
+			let object = {};
+
+			// Cache
+			if (nodeCache.has(`${Cache}AdminRetrieve`)) {
+				console.log("Admin Home Object Cached...")
+				object = JSON.parse(nodeCache.get(`${Cache}AdminRetrieve`))
+			} else {
+				console.log("Admin Home Object Not Cached...")
+
+        object = {
+          ...object, 
+          hero_retrieve: await AdminHeroModel.findOne().sort({ _id: -1 }),
+        };
+  
+				nodeCache.set(`${Cache}AdminRetrieve`, JSON.stringify(object));
+			}
+
+      // let hero_retrieve = await AdminHeroModel.findOne().sort({ _id: -1 });
 
       // Not Found
       // if (!home_retrieve) next(new ErrorHandler(`Home Not Found`, 404))
@@ -124,7 +141,7 @@ exports.homePageController = (Label= 'Home Page', Cache= 'homePageController') =
         success: true,
         message: `${Label} Reterived Successfully`,
         retrieve: {
-          hero_retrieve,
+          hero_retrieve: object["hero_retrieve"],
         }
       })
     }),

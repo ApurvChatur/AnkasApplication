@@ -61,7 +61,7 @@ exports.projectGroupController = (Model= ProjectGroupModel, Label= 'ProjectGroup
 			const object_create = await Model.create(request.body)
 
 			// Invalidate Cache
-			await invalidateCache(Model, nodeCache, [`${Cache}List`], `${Cache}Retrieve`, "Created")
+			await invalidateCache(Model, nodeCache, [`${Cache}List`, 'homePageControllerRetrieve'], `${Cache}Retrieve`, "Created")
 	
 			// Retrieve User Details For Email
 			const fella_user = await UserModel.findById(request.user, 'eEmail')
@@ -152,7 +152,7 @@ exports.projectGroupController = (Model= ProjectGroupModel, Label= 'ProjectGroup
 			)
 	
 			// Invalidate Cache
-			await invalidateCache(Model, nodeCache, [`${Cache}List`], `${Cache}Retrieve`, "Updated")
+			await invalidateCache(Model, nodeCache, [`${Cache}List`, 'homePageControllerRetrieve'], `${Cache}Retrieve`, "Updated")
 
 			// Retrieve User Details For Email
 			const fella_user = await UserModel.findById(request.user, 'eEmail')
@@ -199,7 +199,7 @@ exports.projectGroupController = (Model= ProjectGroupModel, Label= 'ProjectGroup
 			await object_retrieve.deleteOne({"_id": "_id"})
 
 			// Invalidate Cache
-			await invalidateCache(Model, nodeCache, [`${Cache}List`], `${Cache}Retrieve`, "Deleted")
+			await invalidateCache(Model, nodeCache, [`${Cache}List`, 'homePageControllerRetrieve'], `${Cache}Retrieve`, "Deleted")
 
 			// Retrieve User Details For Email
 			const fella_user = await UserModel.findById(request.user, 'eEmail')

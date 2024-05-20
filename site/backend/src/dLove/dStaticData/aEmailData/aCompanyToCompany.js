@@ -82,17 +82,36 @@ switch (process.env.CORPORATION) {
 
                 switch (process.env.APPLICATION) {
                   case 'TechfolioApplication':
+                  case 'ApurvChaturApplication':
+                  case 'AnushreeMandapeApplication':  
+                  case 'SofieBerkinApplication':  
                     companyToCompany = 'techfolio.firm@gmail.com'
                     break;
-                  case 'ApurvChaturApplication':
-                    companyToCompany = 'imapurvchatur@gmail.com'
+
+                  default:
                     break;
-                  case 'AnushreeMandapeApplication':
-                    companyToCompany = 'imapurvchatur@gmail.com'
+                }   
+                break;
+
+              case 'BLogifyFirm':
+
+                switch (process.env.APPLICATION) {
+                  case 'BlogifyApplication':
+                    companyToCompany = 'blogify.firm@gmail.com'
                     break;
-                  case 'SofieBerkinApplication':
-                    companyToCompany = 'imapurvchatur@gmail.com'
+
+                  case 'SrimadBhagwatamApplication':
+                    companyToCompany = 'soup.srimad.bhagwatam@gmail.com'
                     break;
+  
+                  case 'BhagwadGitaApplication':
+                    companyToCompany = 'soup.bhagwad.gita@gmail.com'
+                    break;
+
+                  case 'InterviewQuestionApplication':
+                    companyToCompany = 'soup.interview.question@gmail.com'
+                    break;
+      
                   default:
                     break;
                 }   

@@ -130,33 +130,55 @@ switch (process.env.CORPORATION) {
 
                 switch (process.env.APPLICATION) {
                   case 'TechfolioApplication':
+                  case 'ApurvChaturApplication':
+                  case 'AnushreeMandapeApplication':  
+                  case 'SofieBerkinApplication':  
                     auth = {
                       user: 'techfolio.firm@gmail.com',
                       pass: 'slcb qfsh xseq kdyq'
                     } 
                     break;
-                  case 'ApurvChaturApplication':
-                    auth = {
-                      user: 'imapurvchatur@gmail.com',
-                      pass: 'mzlr fhcd ombm armh'
-                    } 
-                    break;
-                  case 'AnushreeMandapeApplication':
-                    auth = {
-                      user: 'imapurvchatur@gmail.com',
-                      pass: 'mzlr fhcd ombm armh'
-                    } 
-                    break;
-                  case 'SofieBerkinApplication':
-                    auth = {
-                      user: 'imapurvchatur@gmail.com',
-                      pass: 'mzlr fhcd ombm armh'
-                    } 
-                    break;
+    
                   default:
-                      break;
+                    break;
                 }   
                 break;
+
+              case 'BlogifyFirm':
+                switch (process.env.APPLICATION) {
+
+                  case 'BlogifyApplication':
+                    auth = {
+                      user: 'blogify.firm@gmail.com',
+                      pass: 'hujs nrek qzev ukpb'
+                    } 
+                    break;
+    
+                  case 'SrimadBhagwatamApplication':
+                    auth = {
+                      user: 'soup.srimad.bhagwatam@gmail.com',
+                      pass: 'qrug ajlm nlod qcpi'
+                    } 
+                    break;
+      
+                  case 'BhagwadGitaApplication':
+                    auth = {
+                      user: 'soup.bhagwad.gita@gmail.com',
+                      pass: 'uuxe rmkc chox rhpq'
+                    } 
+                    break;
+        
+                  case 'InterviewQuestionApplication':
+                    auth = {
+                      user: 'soup.interview.question@gmail.com',
+                      pass: 'wybd zblr vhdo laxb'
+                    } 
+                    break;
+          
+                  default:
+                    break;
+              }   
+              break;
 
               default:
                 break;

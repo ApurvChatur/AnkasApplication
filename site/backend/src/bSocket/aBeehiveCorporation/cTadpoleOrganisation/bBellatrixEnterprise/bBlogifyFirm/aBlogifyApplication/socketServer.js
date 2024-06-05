@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const socketAuthenticatedUser = require("../../../../../../dLove/bFunction/oSocketAuthenticatedUser");
 const NotificationModel = require("../../../../../../dLove/aMCR/bCommon/aModel/aSetting/cNotificationModel");
 const handleNewMessage = require("./aHandleSocketEvent/aHandleNewMessage");
-const assignUserToSocket = require("../../../../dLove/bFunction/sAssignUserToSocket");
+const assignUserToSocket = require("../../../../../../dLove/bFunction/sAssignUserToSocket");
 
 
 const eventConstants = [

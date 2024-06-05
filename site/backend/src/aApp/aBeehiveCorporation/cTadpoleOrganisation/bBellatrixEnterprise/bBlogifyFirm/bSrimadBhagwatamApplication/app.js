@@ -28,6 +28,8 @@ const projectPageRoute = require('../../../../../../dLove/aMCR/aBeehiveCorporati
 // const blogCardPageRoute = require('../../../../../../dLove/aMCR/aBeehiveCorporation/cTadpoleOrganisation/bBellatrixEnterprise/bBlogifyFirm/bSrimadBhagwatamApplication/cRoute/cMain/zCombinedRoute/dBlogCardPageRoute');
 
 
+const chatPageRoute = require('../../../../../../dLove/aMCR/bCommon/cRoute/eChat/zCombinedRoute/aChatPageRoute');
+
 // App
 const app = express()
 
@@ -70,6 +72,7 @@ app.use("/api/v1/project-page", projectPageRoute)
 // app.use("/api/v1/portfolio-card-page", portfolioCardPageRoute)
 // app.use("/api/v1/event-card-page", eventCardPageRoute)
 // app.use("/api/v1/blog-card-page", blogCardPageRoute)
+app.use("/api/v1/chat-page", chatPageRoute)
 
 app.use(errorHandler)
 

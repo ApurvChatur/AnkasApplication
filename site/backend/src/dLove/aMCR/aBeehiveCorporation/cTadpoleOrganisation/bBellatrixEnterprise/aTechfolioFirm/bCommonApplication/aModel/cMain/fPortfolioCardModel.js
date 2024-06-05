@@ -16,6 +16,10 @@ const schema = new mongoose.Schema({
     image: { type: String },
     url  : { type: String },
   }],
+  dPortfolioImages: [{
+    public_id: { type: String },
+    url      : { type: String },
+  }],
 
 })
 

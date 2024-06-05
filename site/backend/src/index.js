@@ -29,7 +29,7 @@ fileStorage()
 
 // Connect Socket Server
 const server = createServer(app);
-socketApp(server)
+socketApp(server, app)
 
 // Cluster
 // const numCPUs = os.cpus().length;

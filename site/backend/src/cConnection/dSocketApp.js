@@ -1,5 +1,5 @@
 
-const socketApp = async (server) => {
+const socketApp = async (server, app) => {
   const corporation = process.env.CORPORATION;
   const organisation = process.env.ORGANISATION;
   const enterprise = process.env.ENTERPRISE;
@@ -54,7 +54,7 @@ const socketApp = async (server) => {
     if (application && socketConfig[corporation][organisation][enterprise][firm][application]) {
       console.log("Succeed to connect to socket")
       socketServer = require(socketConfig[corporation][organisation][enterprise][firm][application]);
-      return socketServer(server)
+      return socketServer(server, app)
     } else {
       console.log("Failed to connect to socket")
     }
@@ -62,7 +62,7 @@ const socketApp = async (server) => {
     if (application && socketConfig[corporation][organisation][enterprise][application]) {
       console.log("Succeed to connect to socket")
       socketServer = require(socketConfig[corporation][organisation][enterprise][application]);
-      return socketServer(server)
+      return socketServer(server, app)
     } else {
       console.log("Failed to connect to socket")
     }  
@@ -70,7 +70,7 @@ const socketApp = async (server) => {
     if (application && socketConfig[corporation][organisation][application]) {
       console.log("Succeed to connect to socket")
       socketServer = require(socketConfig[corporation][organisation][application]);
-      return socketServer(server);
+      return socketServer(server, app);
     } else {
       console.log("Failed to connect to socket")
     }  

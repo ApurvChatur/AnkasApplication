@@ -10,6 +10,10 @@ const schema = new mongoose.Schema({
     title: { type: String },
     url  : { type: String },  
   }],
+  dGalleryImages: [{
+    public_id: { type: String },
+    url      : { type: String },
+  }],
 
 })
 

@@ -2,6 +2,8 @@ const { Server } = require("socket.io");
 const cookieParser = require('cookie-parser');
 const socketAuthenticatedUser = require("../../../../dLove/bFunction/oSocketAuthenticatedUser");
 const NotificationModel = require("../../../../dLove/aMCR/bCommon/aModel/aSetting/cNotificationModel");
+const handleNewMessage = require("./aHandleSocketEvent/aHandleNewMessage");
+const assignUserToSocket = require("../../../../dLove/bFunction/sAssignUserToSocket");
 
 
 const eventConstants = [
@@ -26,7 +28,7 @@ const eventConstants = [
 
 const typeConstants = ["CREATED", "UPDATED", "DELETED"]
 
-const socketServer = (server) => {
+const socketServer = (server, app) => {
   // Socket 
   const io = new Server(server, {
     cors: { origin:  
@@ -43,6 +45,8 @@ const socketServer = (server) => {
     }
   })
 
+  app.set("io", io);
+
   // Socket Middleware
   io.use((socket, next) => {
     cookieParser()(
@@ -55,7 +59,10 @@ const socketServer = (server) => {
   // Listening Event
   io.on("connection", (socket) => {
     const user = socket.user
+
     console.log("User Connected", socket.id);
+    assignUserToSocket.set(user._id.toString(), socket.id);
+    console.log(assignUserToSocket)
 
     eventConstants.map(each => {
       typeConstants.map(each1 => {
@@ -71,8 +78,12 @@ const socketServer = (server) => {
       })
     })
 
+    handleNewMessage(socket, io);
+
     socket.on("disconnect", () => {
       console.log("User Disconnected")
+      assignUserToSocket.delete(user._id.toString());
+      console.log(assignUserToSocket)
     })
   })  
 }

@@ -6,6 +6,4 @@ const multerUpload = multer({
   },
 });
 
-const attachmentMulter = multerUpload.array("multer_files", 5);
-
-module.exports = { attachmentMulter };
+module.exports = multerUpload;

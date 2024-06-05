@@ -10,6 +10,7 @@ const UserModel = require("../../../../../bCommon/aModel/bAdministration/aUserMo
 const sendEmail = require("../../../../../../bFunction/iSendEmail")
 const nodeCache = require("../../../../../../bFunction/qNodeCache")
 const destroyImage = require("../../../../../../bFunction/rDestroyImage")
+const handleMultipleImage = require("../../../../../../bFunction/tHandleMultipleImage")
 
 
 exports.projectController = (Model= ProjectModel, Label= 'Project', Cache= 'projectController') => {
@@ -44,6 +45,19 @@ exports.projectController = (Model= ProjectModel, Label= 'Project', Cache= 'proj
 
 		// Create Controller
 		create: catchAsyncError(async (request, response, next) => {
+			// Parse Data
+			request.body.aTitle               = JSON.parse(request.body?.aTitle)
+			request.body.aSubtitle            = JSON.parse(request.body?.aSubtitle)
+			request.body.aDescription         = JSON.parse(request.body?.aDescription)
+			request.body.aDetail              = JSON.parse(request.body?.aDetail)
+			request.body.aImage               = JSON.parse(request.body?.aImage)
+			request.body.aStatus              = JSON.parse(request.body?.aStatus)
+			request.body.dWebLinks            = JSON.parse(request.body?.dWebLinks)
+
+
+			// console.log(request.body)
+			// console.log(request.files)
+			
 			// Personal Info
 			request.body.bCreatedAt = new Date(Date.now()),
 			request.body.bCreatedBy = request.user ? request.user : "Kiss Me Hard"
@@ -56,7 +70,16 @@ exports.projectController = (Model= ProjectModel, Label= 'Project', Cache= 'proj
 					'create'
 				)
 			)
-			
+
+			// Gallery Images
+			request.files && (
+				request.body.dGalleryImages = await handleMultipleImage(
+					request.files, 
+					Label,
+					'dGalleryImages'
+				)
+			)
+		
 			// Create
 			const object_create = await Model.create(request.body)
 
@@ -127,6 +150,17 @@ exports.projectController = (Model= ProjectModel, Label= 'Project', Cache= 'proj
 			// Not Found
 			if (!object_retrieve) next(new ErrorHandler(`${Label} Not Found`, 404))
 
+			// Parse Data
+			request.body.aTitle               = JSON.parse(request.body?.aTitle)
+			request.body.aSubtitle            = JSON.parse(request.body?.aSubtitle)
+			request.body.aDescription         = JSON.parse(request.body?.aDescription)
+			request.body.aDetail              = JSON.parse(request.body?.aDetail)
+			request.body.aImage               = JSON.parse(request.body?.aImage)
+			request.body.aStatus              = JSON.parse(request.body?.aStatus)
+			request.body.dWebLinks               = JSON.parse(request.body?.dWebLinks)
+
+			request.body.dGalleryImages     = JSON.parse(request.body?.dGalleryImages)
+						
 			// Personal Info
 			request.body.bUpdatedAt = new Date(Date.now()),
 			request.body.bUpdatedBy = request.user || "Kiss Me Hard"
@@ -141,6 +175,18 @@ exports.projectController = (Model= ProjectModel, Label= 'Project', Cache= 'proj
 				)      
 			)      
 
+			// Gallery Images
+			request.files && (
+				request.body.dGalleryImages = [
+					...request.body.dGalleryImages,
+					...(await handleMultipleImage(
+						request.files, 
+						Label,
+						'dGalleryImages'
+					))
+				]
+			)
+		 
 			// Update
 			object_retrieve = await Model.findByIdAndUpdate(
 				request.params.id,

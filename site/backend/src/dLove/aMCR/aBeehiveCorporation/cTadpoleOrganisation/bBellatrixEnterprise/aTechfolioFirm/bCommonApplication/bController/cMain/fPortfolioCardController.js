@@ -10,6 +10,7 @@ const UserModel = require("../../../../../../../bCommon/aModel/bAdministration/a
 const sendEmail = require("../../../../../../../../bFunction/iSendEmail")
 const nodeCache = require("../../../../../../../../bFunction/qNodeCache")
 const destroyImage = require("../../../../../../../../bFunction/rDestroyImage")
+const handleMultipleImage = require("../../../../../../../../bFunction/tHandleMultipleImage")
 
 
 exports.portfolioCardController = (Model= PortfolioCardModel, Label= 'PortfolioCard', Cache= 'portfolioCardController') => {
@@ -44,6 +45,19 @@ exports.portfolioCardController = (Model= PortfolioCardModel, Label= 'PortfolioC
 
 		// Create Controller
 		create: catchAsyncError(async (request, response, next) => {
+			// Parse Data
+			request.body.aTitle               = JSON.parse(request.body.aTitle)
+			request.body.aSubtitle            = JSON.parse(request.body.aSubtitle)
+			request.body.aDescription         = JSON.parse(request.body.aDescription)
+			request.body.aDetail              = JSON.parse(request.body.aDetail)
+			request.body.aImage               = JSON.parse(request.body.aImage)
+			request.body.aStatus              = JSON.parse(request.body.aStatus)
+			request.body.dLinks               = JSON.parse(request.body.dLinks)
+			request.body.dReferences          = JSON.parse(request.body.dReferences)
+
+			// console.log(request.body)
+			// console.log(request.files)
+
 			// Personal Info
 			request.body.bCreatedAt = new Date(Date.now()),
 			request.body.bCreatedBy = request.user ? request.user : "Kiss Me Hard"
@@ -56,7 +70,16 @@ exports.portfolioCardController = (Model= PortfolioCardModel, Label= 'PortfolioC
 					'create'
 				)
 			)
-			
+
+			// Portfolio Images
+			request.files && (
+			 	request.body.dPortfolioImages = await handleMultipleImage(
+					request.files, 
+					Label,
+					'dPortfolioImages'
+				)
+			)
+
 			// Create
 			const object_create = await Model.create(request.body)
 
@@ -127,6 +150,17 @@ exports.portfolioCardController = (Model= PortfolioCardModel, Label= 'PortfolioC
 			// Not Found
 			if (!object_retrieve) next(new ErrorHandler(`${Label} Not Found`, 404))
 
+			// Parse Data
+			request.body.aTitle               = JSON.parse(request.body.aTitle)
+			request.body.aSubtitle            = JSON.parse(request.body.aSubtitle)
+			request.body.aDescription         = JSON.parse(request.body.aDescription)
+			request.body.aDetail              = JSON.parse(request.body.aDetail)
+			request.body.aImage               = JSON.parse(request.body.aImage)
+			request.body.aStatus              = JSON.parse(request.body.aStatus)
+			request.body.dLinks               = JSON.parse(request.body.dLinks)
+			request.body.dReferences          = JSON.parse(request.body.dReferences)
+			request.body.dPortfolioImages     = JSON.parse(request.body.dPortfolioImages)
+			
 			// Personal Info
 			request.body.bUpdatedAt = new Date(Date.now()),
 			request.body.bUpdatedBy = request.user || "Kiss Me Hard"
@@ -141,6 +175,18 @@ exports.portfolioCardController = (Model= PortfolioCardModel, Label= 'PortfolioC
 				)      
 			)      
 
+			// Portfolio Images
+			request.files && (
+				request.body.dPortfolioImages = [
+					...request.body.dPortfolioImages,
+					...(await handleMultipleImage(
+						request.files, 
+						Label,
+						'dPortfolioImages'
+					))
+				]
+			)
+		 
 			// Update
 			object_retrieve = await Model.findByIdAndUpdate(
 				request.params.id,

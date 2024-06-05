@@ -23,6 +23,8 @@ const staticDataRoute = require('../../../../dLove/aMCR/bCommon/cRoute/dAsset/aS
 const homePageRoute = require('../../../../dLove/aMCR/aBeehiveCorporation/bPinwheelOrganisation/zCommonCombined/cRoute/HomePageRoute');
 const projectPageRoute = require('../../../../dLove/aMCR/aBeehiveCorporation/bPinwheelOrganisation/zCommonCombined/cRoute/bProjectPageRoute');
 
+const chatPageRoute = require('../../../../dLove/aMCR/bCommon/cRoute/eChat/zCombinedRoute/aChatPageRoute');
+
 // App
 const app = express()
 
@@ -62,6 +64,7 @@ app.use("/api/v1/static-data", staticDataRoute)
 
 app.use("/api/v1/home-page", homePageRoute)
 app.use("/api/v1/project-page", projectPageRoute)
+app.use("/api/v1/chat-page", chatPageRoute)
 
 app.use(errorHandler)
 
